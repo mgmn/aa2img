@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html [
+	<!ENTITY lf "&#10;">
+	<!ENTITY nbsp "&#160;">
+	<!ENTITY yen "&#165;">
+	<!ENTITY copy "&#169;">
+	<!ENTITY laquo "&#171;">
+	<!ENTITY raquo "&#187;">
+	<!ENTITY plusmn "&#177;">
+	<!ENTITY minus "&#8722;">
+	<!ENTITY hellip "&#8230;">
+	<!ENTITY lrm "&#8206;">
+]>
+<html lang="ja-jp" xml:lang="ja-jp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>AA 2 IMG | FullAstern!</title>
+
+	<link rel="stylesheet" type="text/css" href="./farbtastic/farbtastic.css" />
+	<script type="text/javascript" src="./farbtastic/farbtastic.js"></script>
+</head>
+<body class="tools">
+
+<section id="content">
+	<header id="contentTop">
+
+		<div class="topTitle">
+			<span>入力テキストを画像に変換します</span>
+		</div>
+	</header><!-- /#contentTop -->
+
+	<div id="mainSheet" class="sheet1 singleCol">
+		<section class="card">
+			<header>
+				<div class="clip"></div>
+				<h3>入力</h3>
+			</header>
+			<form action="./aa2img.php" method="post">
+				<p>
+					<textarea name="str" id="str" class="asciiArt" wrap="off"></textarea>
+				</p>
+				<p>フォント選択:</p>
+				<ol style="list-style: none;">
+					<li>
+						<input type="radio" name="font" id="font[mspg]" value="mspg" checked="checked" />
+						<label for="font[mspg]">MS Pゴシック</label>
+					</li>
+					<li>
+						<input type="radio" name="font" id="font[consola]" value="consola" />
+						<label for="font[consola]">Consola</label>
+					</li>
+				</ol>
+				<p id="pickerHideToggleLink">
+					<input type="button" value="文字色／背景色の選択" onclick="aa2imgPickerHideToggle();" />
+				</p>
+				<fieldset id="pickerField" style="width: 350px; display: none;">
+					<legend>色の設定</legend>
+					<div id="picker" style="float: right;"></div>
+					<p>
+						<label for="color_char">文字色:</label>
+						<input type="text" name="color_char" id="color_char" size="6" value="#000000" class="colorwell" />
+					</p>
+					<p>
+						<label for="reverseButton">色反転:</label>
+						<input type="image" src="./reverse.png" id="reverseButton" alt="反転" onclick="return aa2imgReverse(color_char, color_back);" />
+					</p>
+					<p>
+						<label for="color_back">背景色:</label>
+						<input type="text" name="color_back" id="color_back" size="6" value="#ffffff" class="colorwell" />
+					</p>
+					<p>
+						<label for="color_trans">背景を透過:</label>
+						<input type="checkbox" name="color_trans[]" id="color_trans" />
+					</p>
+					<p>
+						<input type="button" id="restoreWBButton" value="白黒 (Default)" onclick="return aa2imgWhiteBlack(color_char, color_back);" />
+					</p>
+				</fieldset>
+			</form>
+		</section>
+		<section class="card" id="out" style="display:none">
+			<header>
+				<div class="clip"></div>
+				<h3>出力画像</h3>
+			</header>
+			<figure class="centerFig">
+				<figcaption>クリックで新規ウィンドウ、右クリックで保存できます。</figcaption>
+				<a href="#" id="outA" target="_blank">
+					<img src="#" id="outI" alt="Output image" style="max-width:512px;background-image:url(./tile.png);" />
+				</a>
+			</figure>
+		</section>
+		<section class="card">
+			<header>
+				<div class="clip"></div>
+				<h3>説明</h3>
+			</header>
+			<ul>
+				<li>入力された文字列をMS Pゴシック、またはConsola 12ptで画像に変換します。</li>
+				<li>画像形式はPNGです。</li>
+			</ul>
+			<ul>
+				<li>色の設定は<span class="button">文字色／背景色の選択</span>から変えたい色のカラーコード<code>#xxxxxx</code>部分をクリック後、ピッカーから選択します。</li>
+				<li>文字色と背景色は明暗差を大きくした方が良いです。でないと見辛いです。</li>
+			</ul>
+		</section>
+
+	</div><!-- /#mainSheet -->
+	<script type="text/javascript" src="./form-aa2img.js"></script>
+
+</section><!-- /#content -->
+
+</body>
+</html>
