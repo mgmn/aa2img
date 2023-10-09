@@ -3,3 +3,11 @@ DirectoryIndex index.xhtml
 <FilesMatch "\.ttf$">
     Require all denied
 </FilesMatch>
+
+# regulate hostname
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^aa2img\.mgmn\.jp$
+RewriteRule ^.*$ - [F]
+
+# strict transport security
+Header Set "Strict-Transport-Security" "max-age=31536000"
