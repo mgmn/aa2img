@@ -1,0 +1,5 @@
+DirectoryIndex index.xhtml
+
+<FilesMatch "\.ttf$">
+    Require all denied
+</FilesMatch>

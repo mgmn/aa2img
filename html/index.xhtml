@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="ja-jp" xml:lang="ja-jp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>aa2img</title>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" type="text/css" href="./farbtastic/farbtastic.css" />
+	<script type="text/javascript" src="./farbtastic/farbtastic.js"></script>
+
+	<style type="text/css">
+		textarea{
+			max-width: 100%;
+			font-family: "Mona", "MS PGothic AA", "MS PGothic", "IPAMonaPGothic", "MeiryoKe_PGothic", sans-serif;
+			font-size: 16px;
+			line-height: 18px;
+		}
+		figure>div{
+			max-width: 100%;
+			border: 1px solid #666;
+			padding: 4px;
+			background-image:url(./tile.png);
+		}
+	</style>
+</head>
+<body>
+
+<section>
+	<header>
+		<h1>aa2img</h1>
+		<p>
+			入力されたテキストをアスキーアートに合わせた MS Pゴシック 12pt で画像に変換します
+		</p>
+	</header>
+
+	<section id="out" style="display:none">
+		<header>
+			<h3>出力画像</h3>
+		</header>
+		<figure>
+			<div>
+				<a href="#" id="outA" target="_blank">
+					<img src="#" id="outI" alt="image" />
+				</a>
+			</div>
+			<figcaption><small>クリックで新規ウィンドウ、右クリックで保存できます。</small></figcaption>
+		</figure>
+	</section>
+
+	<section>
+		<header>
+			<h3>入力</h3>
+		</header>
+		<form action="./aa2img.php" method="post">
+			<p>
+				<textarea name="str" id="str" class="asciiArt" cols="50" rows="10" wrap="off"></textarea>
+				<button type="button" onclick="javascript:$('#str').val('');">消去</button>
+				<input type="submit" id="submit" value="変換" />
+			</p>
+			<p>フォント選択:</p>
+			<ol style="list-style: none;">
+				<li>
+					<input type="radio" name="font" id="font[mspg]" value="mspg" checked="checked" />
+					<label for="font[mspg]">MS Pゴシック</label>
+				</li>
+				<li>
+					<input type="radio" name="font" id="font[consola]" value="consola" />
+					<label for="font[consola]">Consola</label>
+				</li>
+			</ol>
+			<fieldset id="pickerField" style="width: 350px">
+				<legend>色の設定</legend>
+				<div id="picker" style="float: right;"></div>
+				<p>
+					<label for="color_char">文字色:</label>
+					<input type="text" name="color_char" id="color_char" size="6" value="#000000" class="colorwell" />
+				</p>
+				<p class="require_script" style="display: none;">
+					<label for="reverseButton">色反転:</label>
+					<input type="image" src="./reverse.png" id="reverseButton" alt="反転" onclick="return aa2imgReverse(color_char, color_back);" />
+				</p>
+				<p>
+					<label for="color_back">背景色:</label>
+					<input type="text" name="color_back" id="color_back" size="6" value="#efefef" class="colorwell" />
+				</p>
+				<p>
+					<label for="color_trans">背景を透過:</label>
+					<input type="checkbox" name="color_trans[]" id="color_trans" />
+				</p>
+				<p class="require_script" style="display: none;">
+					<input type="button" id="restoreWBButton" value="白地黒字" onclick="return aa2imgWhiteBlack(color_char, color_back);" />
+				</p>
+			</fieldset>
+		</form>
+	</section>
+
+	<section>
+		<header>
+			<h3>説明</h3>
+		</header>
+		<ul>
+			<li>画像形式は PNG です。</li>
+			<li>色の設定は「文字色／背景色の選択」から変えたい色のカラーコード <code>#xxxxxx</code> 部分をクリック後、ピッカーから選択します。</li>
+			<li>文字色と背景色は明暗差を大きくしたほうが良いです、でないと見づらいです。</li>
+			<li>Unicode Emoji など、フォントに収録されていない文字情報は化けます。</li>
+		</ul>
+	</section>
+
+	<script type="text/javascript" src="./form-aa2img.js"></script>
+
+	<footer>
+		<small><a href="https://github.com/mgmn/aa2img">GitHub</a></small>
+	</footer>
+</section>
+
+</body>
+</html>
